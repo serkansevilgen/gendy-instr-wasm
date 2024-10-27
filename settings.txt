@@ -1,0 +1,2 @@
+https://github.com/csound/wasm/blob/main/docs/tutorial1-getting-started.md
+https://vlazzarini.github.io/vanilla/
