@@ -47,15 +47,15 @@ document.querySelector('#app').innerHTML = `
 <label for="krestdur">Rest Duration</label>  
 <input type="range" id="krestdur" min="0" max="10" value="1" step="0.01"
   oninput="sendData(id, value)"> <span id="krestdurval"> 1 </span> </input> 
-</p>
-<hr />
+</p> 
+<hr />-->
 <p>
 <label for="gendy_kampdist">gendy_kampdist</label>  
 <input type="range" id="gendy_kampdist" min="1" max="6" value="1" step="1"
   oninput="sendData(id, value)"> <span id="gendy_kampdistval"> 1 </span> </input> 
 </p>    
 <label for="gendy_kdurdist">gendy_kdurdist</label>  
-<input type="range" id="gendy_kdurdist" min="0.001" max="1" value="0.001" step="0.001"
+<input type="range" id="gendy_kdurdist" min="1" max="6" value="1" step="1"
   oninput="sendData(id, value)"> <span id="gendy_kdurdistval"> 0 </span> </input> 
 </p>    
 <label for="gendy_kadpar">gendy_kadpar</label>  
