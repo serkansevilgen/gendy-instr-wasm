@@ -42,7 +42,7 @@ instr 1 ;; Xenakis gendy
 
   kampdist random 1, 6
   kamp init 0.3
-  kdurdist random 0.0001, 1
+  kdurdist random 1, 6
   kadpar random 0.0001, 1
   kddpar random 0.0001, 1
   kminfreq random 20, 2000
