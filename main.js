@@ -1,5 +1,6 @@
 import { Csound } from '@csound/browser';
 import './style.css'
+import './custom_style.css'
 import csd from './gendy.csd?raw'
 
 // oninput function
@@ -17,15 +18,18 @@ document.querySelector('#app').innerHTML = `
 <hr />
 <div id="sliders">
 <p>
-<label for="kgate">On / Off (mute)</label> 
+<button id='playButton'>PLAY</button>
+</p>
+<p>
+<label for="kgate"> PLAY On / Off</label> 
 <input type="checkbox" id="kgate"  onchange="sendData(this.id, this.checked ? 1 : 0.1)">
 	      <span id="kgateval"> 0 </span> </input> 
-<p>
+</p>
 <hr />
 <p>
 <label for="kamp">amp</label>  
-<input type="range" id="kamp" min="0" max="1" value="0" step="0.01"
-  oninput="sendData(id, value)"> <span id="kampval"> 0 </span> </input> 
+<input type="range" id="kampmain" min="0" max="1" value="0" step="0.01"
+  oninput="sendData(id, value)"> <span id="kampmainval"> 0 </span> </input> 
   </p>
 <p>
 <label for="kpanpos">Pan Position</label>  

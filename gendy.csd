@@ -28,7 +28,7 @@ schedule "Reverb", 0, -1
 instr 1 ;; Xenakis gendy
   ;; kamp init 0.0 ;; 0.1 - 1.0
   ;; kampdist init 1 ;; 1 - 6
-  ;; kdurdist init 0.001 ;; 0.0001 - 1
+  ;; kdurdist init 1 ;; 1 - 6
   ;; kadpar init 0.0001 ;;  0.0001 - 1
   ;; kddpar init 0.0001 ;;  0.0001 - 1
   ;; kminfreq init 20 ;; 20 - 20000 
@@ -41,7 +41,7 @@ instr 1 ;; Xenakis gendy
 
 
   kampdist random 1, 6
-  kamp init 0.3
+  kamp init 0.5
   kdurdist random 1, 6
   kadpar random 0.0001, 1
   kddpar random 0.0001, 1
@@ -50,13 +50,15 @@ instr 1 ;; Xenakis gendy
   kmaxfreq = kminfreq + kfreqdiff
   kampscl random 0.1, 1
   kdurscl random 0.1, 1      
+
   kgate init 0
+  kampmain init 0
   kpanpos init 0.5
   kRvbSendAmt init 0.2
 
-  kamp_channel chnget "kamp"
-  if kamp_channel != 0 then
-    kamp = kamp_channel
+  kampmain_channel chnget "kampmain"
+  if kampmain_channel != 0 then
+    kampmain = kampmain_channel
   endif
   kampdist_channel chnget "gendy_kampdist"
   if kampdist_channel != 0 then
@@ -105,7 +107,7 @@ instr 1 ;; Xenakis gendy
   
   asig gendy kamp, kampdist, kdurdist, kadpar, kddpar, kminfreq, kmaxfreq,kampscl, kdurscl
   kenv_prevent_click linsegr 0, 0.01, 1, p3-0.02, 1, 0.01, 0
-  asig = asig * kgate * kenv_prevent_click
+  asig = asig * kampmain * kgate * kenv_prevent_click
   aL, aR pan2 asig, kpanpos
   outs aL, aR
   gaReverb = gaReverb + (asig * kRvbSendAmt)          
