@@ -111,6 +111,8 @@ instr 1 ;; Xenakis gendy
   gaReverb = gaReverb + (asig * kRvbSendAmt)          
 endin
 
+schedule 1, 0, -1
+
 instr 10
   knotedur init 1
   krestdur init 1
