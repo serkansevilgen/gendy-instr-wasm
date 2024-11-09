@@ -92,7 +92,7 @@ instr 1 ;; Xenakis gendy
   endif
   kgate_channel chnget "kgate"
   if kgate_channel != 0 then
-    kgate = kgate_channel
+    kgate = floor(kgate_channel)
   endif
   kpanpos_channel chnget "kpanpos"
   if kpanpos_channel != 0 then
