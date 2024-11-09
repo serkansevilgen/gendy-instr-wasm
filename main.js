@@ -38,7 +38,7 @@ document.querySelector('#app').innerHTML = `
   oninput="sendData(id, value)"> <span id="kRvbSendAmtval"> 0 </span> </input> 
 </p>
 <hr />
-<p>
+<!-- <p>
 <label for="knotedur">Note Duration</label>  
 <input type="range" id="knotedur" min="0.01" max="10" value="1" step="0.01"
   oninput="sendData(id, value)"> <span id="knotedurval"> 1 </span> </input> 
