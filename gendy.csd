@@ -50,7 +50,7 @@ instr 1 ;; Xenakis gendy
   kmaxfreq = kminfreq + kfreqdiff
   kampscl random 0.1, 1
   kdurscl random 0.1, 1      
-  kgate init 1
+  kgate init 0
   kpanpos init 0.5
   kRvbSendAmt init 0.2
 
