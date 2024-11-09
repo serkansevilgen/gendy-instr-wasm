@@ -18,7 +18,7 @@ document.querySelector('#app').innerHTML = `
 <div id="sliders">
 <p>
 <label for="kgate">On / Off (mute)</label> 
-<input type="checkbox" id="kgate"  oninput="sendData(id, value)">
+<input type="checkbox" id="kgate"  onchange="sendData(this.id, this.checked ? 1 : 0.1)">
 	      <span id="kgateval"> 0 </span> </input> 
 <p>
 <hr />
