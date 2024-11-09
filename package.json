@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
       "preview": "vite preview",
-      "deploy" : "gh-pages -d dist"
+      "deploy" : "npm run build && aws s3 --profile serkan sync ./dist s3://gendy-web.serkansevilgen.com/"
   },
   "devDependencies": {
     "gh-pages": "^6.2.0",
