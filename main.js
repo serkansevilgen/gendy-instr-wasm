@@ -4,7 +4,7 @@ import csd from './gendy.csd?raw'
 
 // oninput function
 window.sendData = async function (channel, value) {
-  // set channel
+    console.log(channel, value)
   if(csound) await csound.setControlChannel(channel, value);
   // update display
   document.getElementById(channel+"val").innerHTML = value;
