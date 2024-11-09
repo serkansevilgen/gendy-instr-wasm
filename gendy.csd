@@ -136,7 +136,7 @@ instr 10
     event_i "i", 1, 0, inotedur
 endin
 
-schedule 10, 0, -1
+;; schedule 10, 0, -1
 
 
 </CsInstruments>
