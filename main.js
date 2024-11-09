@@ -102,3 +102,22 @@ const startCsound = async () => {
 
 document.querySelector('#startButton').addEventListener('click', startCsound);
 
+document.querySelector('#playButton').addEventListener('mousedown', ()=> {
+    sendData("kgate", 1)
+    console.log("mousedown")
+});
+document.querySelector('#playButton').addEventListener('mouseup', ()=> {
+    sendData("kgate", 0.1)
+    console.log("mouseup")
+});
+document.querySelector('#playButton').addEventListener('touchstart', (event)=> {
+    event.preventDefault();
+    sendData("kgate", 1)
+    console.log("touchstart")
+});
+document.querySelector('#playButton').addEventListener('touchend', (event)=> {
+    event.preventDefault();
+    sendData("kgate", 0.1)
+    console.log("touchend")
+});
+
