@@ -25,97 +25,82 @@ endin
 
 schedule "Reverb", 0, -1
 
+instr set_init
+  chnset 1, "gendy_kampdist"
+  chnset 1, "gendy_kdurdist"
+  chnset 0.0001, "gendy_kadpar"
+  chnset 0.0001, "gendy_kddpar"
+  chnset 20, "gendy_kminfreq"
+  chnset 20, "gendy_kmaxfreq"
+  chnset 0.1, "gendy_kampscl"
+  chnset 0.1, "gendy_kdurscl"
+
+  chnset 0, "kgate"
+  chnset 0.5, "kampmain"
+  chnset 0.5, "kpanpos"
+  chnset 0, "kRvbSendAmt"
+
+  chnset 0.1, "iatt_dur"
+  chnset 0.1, "idec_dur"
+  chnset 60*60*24, "isus_dur"
+  chnset 0.1, "irel_dur"
+  chnset 1, "ienv_val1"
+  chnset 0.8, "ienv_val2"
+  chnset 0.8, "ienv_val3"
+
+endin  
+schedule "set_init", 0, 1
+
 instr 1 ;; Xenakis gendy
-  ;; kamp init 0.0 ;; 0.1 - 1.0
-  ;; kampdist init 1 ;; 1 - 6
-  ;; kdurdist init 1 ;; 1 - 6
-  ;; kadpar init 0.0001 ;;  0.0001 - 1
-  ;; kddpar init 0.0001 ;;  0.0001 - 1
-  ;; kminfreq init 20 ;; 20 - 20000 
-  ;; kmaxfreq init 20 ;; 20 - 20000 
-  ;; kampscl init 0.1 ;; 0.1 - 1
-  ;; kdurscl init 0.1 ;; 0.1 - 1
-  ;; kgate init 0 ;; 0 / 1
-  ;; kpanpos init 0.0 ;; 0.0 - 1.0
-  ;; kRvbSendAmt init 0.0 ;; 0.0 - 1.0
+  kampdist chnget "gendy_kampdist"
+  kdurdist chnget "gendy_kdurdist"
 
+  kadpar chnget "gendy_kadpar"
+  kddpar chnget "gendy_kddpar"
+  kminfreq chnget "gendy_kminfreq"
+  kmaxfreq chnget "gendy_kmaxfreq"
+  kampscl chnget "gendy_kampscl"
+  kdurscl chnget "gendy_kdurscl"
 
-  kampdist random 1, 6
-  kamp init 0.5
-  kdurdist random 1, 6
-  kadpar random 0.0001, 1
-  kddpar random 0.0001, 1
-  kminfreq random 20, 2000
-  kfreqdiff random 10, 100     
-  kmaxfreq = kminfreq + kfreqdiff
-  kampscl random 0.1, 1
-  kdurscl random 0.1, 1      
+  kampmain chnget "kampmain"
+  kgate chnget "kgate"
+  kpanpos chnget "kpanpos"
+  kRvbSendAmt chnget "kRvbSendAmt"
 
-  kgate init 0
-  kampmain init 0
-  kpanpos init 0.5
-  kRvbSendAmt init 0.2
+  asig gendy 0.4, kampdist, kdurdist, kadpar, kddpar, kminfreq, kmaxfreq,kampscl, kdurscl
 
-  kampmain_channel chnget "kampmain"
-  if kampmain_channel != 0 then
-    kampmain = kampmain_channel
-  endif
-  kampdist_channel chnget "gendy_kampdist"
-  if kampdist_channel != 0 then
-    kampdist = kampdist_channel
-  endif
-  kdurdist_channel chnget "gendy_kdurdist"
-  if kdurdist_channel != 0 then
-    kdurdist = kdurdist_channel
-  endif
-  kadpar_channel chnget "gendy_kadpar"
-  if kadpar_channel != 0 then
-    kadpar = kadpar_channel
-  endif
-  kddpar_channel chnget "gendy_kddpar"
-  if kddpar_channel != 0 then
-    kddpar = kddpar_channel
-  endif
-  kminfreq_channel chnget "gendy_kminfreq"
-  if kminfreq_channel != 0 then
-    kminfreq = kminfreq_channel
-  endif
-  kmaxfreq_channel chnget "gendy_kmaxfreq"
-  if kmaxfreq_channel != 0 then
-    kmaxfreq = kmaxfreq_channel
-  endif
-  kampscl_channel chnget "gendy_kampscl"
-  if kampscl_channel != 0 then
-    kampscl = kampscl_channel
-  endif
-  kdurscl_channel chnget "gendy_kdurscl"
-  if kdurscl_channel != 0 then
-    kdurscl = kdurscl_channel
-  endif
-  kgate_channel chnget "kgate"
-  if kgate_channel != 0 then
-    kgate = floor(kgate_channel)
-  endif
-  kpanpos_channel chnget "kpanpos"
-  if kpanpos_channel != 0 then
-    kpanpos = kpanpos_channel
-  endif
-  kRvbSendAmt_channel chnget "kRvbSendAmt"
-  if kRvbSendAmt_channel != 0 then
-    kRvbSendAmt = kRvbSendAmt_channel
-  endif
+  iatt_dur chnget "iatt_dur"
+  idec_dur chnget "idec_dur"
+  isus_dur chnget "isus_dur"
+  irel_dur chnget "irel_dur"
+  ienv_val1 chnget "ienv_val1"
+  ienv_val2 chnget "ienv_val2"
+  ienv_val3 chnget "ienv_val3"
   
-  asig gendy kamp, kampdist, kdurdist, kadpar, kddpar, kminfreq, kmaxfreq,kampscl, kdurscl
-  kenv_prevent_click linsegr 0, 0.01, 1, p3-0.02, 1, 0.01, 0
-  asig = asig * kampmain * kgate * kenv_prevent_click
+  aenv expsegr 0.0001, iatt_dur, ienv_val1, idec_dur, ienv_val2, isus_dur, ienv_val3, irel_dur, 0.0001
+
+  asig = asig * kampmain * aenv
+
   aL, aR pan2 asig, kpanpos
   outs aL, aR
   gaReverb = gaReverb + (asig * kRvbSendAmt)          
 endin
 
-schedule 1, 0, -1
+instr 100 ;; gater
+  kgate chnget "kgate"
+  kchange changed kgate
 
-instr 10
+  if (kchange == 1 && kgate == 1) then
+    event "i", 1, 0, 60*60*24
+  elseif (kchange == 1 && kgate == 0) then
+    turnoff2 1, 4, 1
+  endif
+endin  
+
+schedule 100, 0, -1
+  
+;;--- UNUSED ---;;
+instr pattern_generator
   knotedur init 1
   krestdur init 1
 
@@ -138,11 +123,23 @@ instr 10
     event_i "i", 1, 0, inotedur
 endin
 
-;; schedule 10, 0, -1
+;; schedule "pattern_generator", 0, -1
+
+;;--- UTILITIES ---;;
+instr 99991
+  kgate init 1
+  kgate chnget "kgate"
+  printk 1, kgate
+endin  
+;; schedule 99991, 0, -1
+
+instr send_message
+  chnset p4, "kgate"
+endin
+;; schedule "send_message", 0, 1, 0
 
 
 </CsInstruments>
 <CsScore>
-
 </CsScore>
 </CsoundSynthesizer>
