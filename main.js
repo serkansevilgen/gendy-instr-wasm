@@ -83,11 +83,11 @@ val3 <input type="text" id="ienv_val3" class="envelope" value="0.8" size="2"></i
    <span id="gendy_kddparval"> 0 </span> </input> 
 </p>    
 <label for="gendy_kminfreq">gendy_kminfreq</label>  
-<input type="range" id="gendy_kminfreq" class="slider-input" min="20" max="20000" value="20" step="1">
+<input type="range" id="gendy_kminfreq" class="slider-input" min="20" max="4000" value="20" step="1">
    <span id="gendy_kminfreqval"> 20 </span> </input> 
 </p>    
 <label for="gendy_kmaxfreq">gendy_kmaxfreq</label>  
-<input type="range" id="gendy_kmaxfreq" class="slider-input" min="21" max="20000" value="21" step="p11">
+<input type="range" id="gendy_kmaxfreq" class="slider-input" min="21" max="4000" value="21" step="1">
    <span id="gendy_kmaxfreqval"> 21 </span> </input> 
 </p>    
 <label for="gendy_kampscl">gendy_kampscl</label>  
