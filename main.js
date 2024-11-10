@@ -97,7 +97,8 @@ val3 <input type="text" id="ienv_val3" class="envelope" value="0.8" size="2"></i
 <label for="gendy_kdurscl">gendy_kdurscl</label>  
 <input type="range" id="gendy_kdurscl" class="slider-input" min="0.1" max="1" value="0.1" step="0.01">
    <span id="gendy_kdursclval"> 0.1 </span> </input> 
-</p>    
+</p>
+ <button id='randomizeButton'>Randomize Gendy Parameters</button>    
 </div>
 `
 
@@ -157,3 +158,19 @@ document.querySelectorAll('.slider-input').forEach(slider => {
 	updateSliderValue(event.target);
     });
 });
+
+function randomizeGendyParams() {
+  const gendyInputs = document.querySelectorAll('input[id^="gendy_"]');
+  
+  gendyInputs.forEach(input => {
+    const min = parseFloat(input.min);
+    const max = parseFloat(input.max);
+    const randomValue = Math.random() * (max - min) + min;
+    
+    // Update the input value, span, and call sendData
+    input.value = randomValue;
+    sendData(input.id, randomValue);
+  });
+}
+
+document.querySelector('#randomizeButton').addEventListener('click', randomizeGendyParams);
