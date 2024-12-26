@@ -46,8 +46,8 @@ document.querySelector('#app').innerHTML = `
       Düşme Süresi <input type="range" id="dec_durslider" class="slider-input" min="0.005" max="1" value="0.1" step="0.01">
       <span id="dec_dursliderval"> 0.1 </span> </input>
     <br>
-      Sürme Süresi<input type="range" id="sus_durslider" class="slider-input" min="0.005" max="9999" value="0.1" step="0.01">
-      <span id="sus_dursliderval"> 0.1 </span> </input>
+      Sürme Süresi<input type="range" id="sus_durslider" class="slider-input" min="0.005" max="9999" value="9999" step="0.01">
+      <span id="sus_dursliderval"> 9999 </span> </input>
       <input type="checkbox" id=sustainmax class="slider-input">Sürekli</input>
 
 
