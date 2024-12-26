@@ -69,13 +69,13 @@ instr 1 ;; Xenakis gendy
 
   asig gendy 0.4, kampdist, kdurdist, kadpar, kddpar, kminfreq, kmaxfreq,kampscl, kdurscl
 
-  iatt_dur chnget "iatt_dur"
-  idec_dur chnget "idec_dur"
-  isus_dur chnget "isus_dur"
-  irel_dur chnget "irel_dur"
-  ienv_val1 chnget "ienv_val1"
-  ienv_val2 chnget "ienv_val2"
-  ienv_val3 chnget "ienv_val3"
+  iatt_dur = p4
+  idec_dur = p5
+  isus_dur = p6
+  irel_dur = p7
+  ienv_val1 = p8
+  ienv_val2 = p9
+  ienv_val3 = p10
   
   aenv expsegr 0.0001, iatt_dur, ienv_val1, idec_dur, ienv_val2, isus_dur, ienv_val3, irel_dur, 0.0001
 
@@ -90,8 +90,18 @@ instr 100 ;; gater
   kgate chnget "kgate"
   kchange changed kgate
 
+  kiatt_dur chnget "iatt_dur"
+  kidec_dur chnget "idec_dur"
+  kisus_dur chnget "isus_dur"
+  kirel_dur chnget "irel_dur"
+  kienv_val1 chnget "ienv_val1"
+  kienv_val2 chnget "ienv_val2"
+  kienv_val3 chnget "ienv_val3"
+  kdur = kiatt_dur + kidec_dur + kisus_dur
+
+  
   if (kchange == 1 && kgate == 1) then
-    event "i", 1, 0, 60*60*24
+    event "i", 1, 0, kdur, kiatt_dur,kidec_dur, kisus_dur, kirel_dur, kienv_val1, kienv_val2, kienv_val3
   elseif (kchange == 1 && kgate == 0) then
     turnoff2 1, 4, 1
   endif
