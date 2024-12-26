@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
           alternative1: resolve(__dirname, 'alternative1/index.html'),
+          alternative2: resolve(__dirname, 'alternative2/index.html'),
       },
     },
   },
